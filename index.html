@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT : ระบบรดน้ำต้นไม้อัจฉริยะ</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="bg-gradient-to-br from-slate-800 to-sky-900 text-gray-200 min-h-screen flex flex-col">
+
+    <header class="bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between py-4">
+                <div class="text-4xl font-bold text-white mb-4 md:mb-0">
+                    <span class="material-icons-outlined align-middle">auto_awesome</span>
+                    IoT อินเตอร์เน็ตของสรรพสิ่ง
+                </div>
+                <ul id="main-menu" class="flex space-x-2 md:space-x-4 bg-slate-700/50 p-2 rounded-full">
+                    <li><a href="#home" data-target="home" class="menu-link menu-active text-sm md:text-base px-4 py-2 rounded-full transition duration-300 hover:bg-green-400 hover:text-slate-800 flex items-center gap-2"><span class="material-icons-outlined">home</span> หน้าแรก</a></li>
+                    <li><a href="#learn" data-target="learn" class="menu-link text-sm md:text-base px-4 py-2 rounded-full transition duration-300 hover:bg-green-400 hover:text-slate-800 flex items-center gap-2"><span class="material-icons-outlined">school</span> เรียนรู้</a></li>
+                    <li><a href="#build" data-target="build" class="menu-link text-sm md:text-base px-4 py-2 rounded-full transition duration-300 hover:bg-green-400 hover:text-slate-800 flex items-center gap-2"><span class="material-icons-outlined">construction</span> สร้างระบบ</a></li>
+                    <li><a href="#quiz" data-target="quiz" class="menu-link text-sm md:text-base px-4 py-2 rounded-full transition duration-300 hover:bg-green-400 hover:text-slate-800 flex items-center gap-2"><span class="material-icons-outlined">quiz</span> ทดสอบ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8 flex-grow">
+
+        <section id="home" class="content-section text-center">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+
+        <header class="text-center mb-20 md:mb-24">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <span class="material-icons-outlined text-green-300 text-6xl md:text-7xl icon-glow">lan</span>
+                <h1 class="text-4xl md:text-6xl font-bold text-white tracking-wide">Internet of Things (IoT) คืออะไร?</h1>
+            </div>
+            <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                คือการที่อุปกรณ์และสิ่งของต่างๆ รอบตัวเรา สามารถเชื่อมต่อและสื่อสารแลกเปลี่ยนข้อมูลกันได้ผ่านอินเทอร์เน็ต ทำให้เราสามารถควบคุม สั่งการ หรือรับข้อมูลจากอุปกรณ์เหล่านั้นได้จากระยะไกล พูดง่ายๆ ก็คือ การนำอินเทอร์เน็ตไปใส่ในสิ่งของต่างๆ เพื่อให้มันทำงานร่วมกันได้อย่างชาญฉลาดนั่นเอง
+            </p>
+        </header>
+
+        <section class="mb-20 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-green-300">ส่วนประกอบหลักของ IoT</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg">
+                    <span class="material-icons-outlined text-5xl text-green-300 mb-3">devices</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">1. อุปกรณ์ (Things)</h3>
+                    <p class="text-gray-300">คือสิ่งของที่สามารถเชื่อมต่ออินเทอร์เน็ตได้ เช่น เซ็นเซอร์, เครื่องใช้ไฟฟ้า, รถยนต์ หรือแม้แต่เสื้อผ้า</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg">
+                    <span class="material-icons-outlined text-5xl text-green-300 mb-3">wifi</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">2. เครือข่าย (Network)</h3>
+                    <p class="text-gray-300">คือระบบที่เชื่อมต่ออุปกรณ์ต่างๆ เข้าด้วยกัน เช่น Wi-Fi, Bluetooth, 4G/5G เพื่อใช้ส่งข้อมูล</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg">
+                    <span class="material-icons-outlined text-5xl text-green-300 mb-3">cloud</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">3. บริการ (Services)</h3>
+                    <p class="text-gray-300">คือแอปพลิเคชันหรือแพลตฟอร์มบนคลาวด์ ที่ช่วยควบคุม จัดการ และวิเคราะห์ข้อมูลจากอุปกรณ์</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-green-300">หลักการทำงานของ IoT</h2>
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 md:gap-8">
+                <div class="flex-1 flex flex-col items-center text-center p-6 bg-black/20 rounded-xl">
+                    <span class="material-icons-outlined text-6xl mb-4 text-green-300 icon-glow">sensors</span>
+                    <h3 class="font-bold text-xl mb-2 text-white">1. ตรวจจับ (Sense)</h3>
+                    <p class="text-gray-400">รวบรวมข้อมูลจากสภาพแวดล้อมผ่านเซ็นเซอร์ต่างๆ</p>
+                </div>
+                <div class="flex-1 flex flex-col items-center text-center p-6 bg-black/20 rounded-xl">
+                    <span class="material-icons-outlined text-6xl mb-4 text-green-300 icon-glow">cloud_upload</span>
+                    <h3 class="font-bold text-xl mb-2 text-white">2. ส่งข้อมูล (Communicate)</h3>
+                    <p class="text-gray-400">ส่งข้อมูลที่รวบรวมได้ไปยังระบบประมวลผลผ่านเครือข่าย</p>
+                </div>
+                <div class="flex-1 flex flex-col items-center text-center p-6 bg-black/20 rounded-xl">
+                    <span class="material-icons-outlined text-6xl mb-4 text-green-300 icon-glow">developer_board</span>
+                    <h3 class="font-bold text-xl mb-2 text-white">3. ประมวลผล (Process)</h3>
+                    <p class="text-gray-400">วิเคราะห์ข้อมูลและตัดสินใจว่าจะทำอะไรต่อไป</p>
+                </div>
+                <div class="flex-1 flex flex-col items-center text-center p-6 bg-black/20 rounded-xl">
+                    <span class="material-icons-outlined text-6xl mb-4 text-green-300 icon-glow">play_for_work</span>
+                    <h3 class="font-bold text-xl mb-2 text-white">4. สั่งการ (Act)</h3>
+                    <p class="text-gray-400">สั่งให้อุปกรณ์ทำงานตามผลที่ประมวลได้</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-green-300">องค์ประกอบฮาร์ดแวร์สำคัญ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg border border-transparent hover:border-green-400 transition-all duration-300 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons-outlined text-4xl text-green-300 mr-4">thermostat</span>
+                        <h3 class="text-2xl font-bold text-white">อุปกรณ์เซ็นเซอร์ (Sensors)</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">ทำหน้าที่ตรวจจับและรวบรวมข้อมูลจากสิ่งแวดล้อม เช่น อุณหภูมิ, ความชื้น, แสง, การเคลื่อนไหว หรือค่าทางเคมีต่างๆ แล้วแปลงเป็นสัญญาณไฟฟ้า</p>
+                    <p class="font-semibold text-green-200">ตัวอย่าง: เซ็นเซอร์อุณหภูมิ, เซ็นเซอร์แสง, เซ็นเซอร์วัดความชื้น</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg border border-transparent hover:border-green-400 transition-all duration-300 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons-outlined text-4xl text-green-300 mr-4">precision_manufacturing</span>
+                        <h3 class="text-2xl font-bold text-white">อุปกรณ์แอคชูเอเตอร์ (Actuators)</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">ทำหน้าที่ตรงข้ามกับเซ็นเซอร์ คือการทำงานตามคำสั่งที่ได้รับจากหน่วยประมวลผล เพื่อทำให้เกิดการเปลี่ยนแปลงทางกายภาพ เช่น การเปิด-ปิด, การเคลื่อนที่ หรือการส่งเสียง</p>
+                    <p class="font-semibold text-green-200">ตัวอย่าง: มอเตอร์, หลอดไฟ LED, ปั๊มน้ำ, ลำโพง</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg border border-transparent hover:border-green-400 transition-all duration-300 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons-outlined text-4xl text-green-300 mr-4">memory</span>
+                        <h3 class="text-2xl font-bold text-white">หน่วยประมวลผล (Processing Unit)</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">เปรียบเสมือน "สมอง" ของระบบ IoT ทำหน้าที่รับข้อมูลจากเซ็นเซอร์มาประมวลผลตามโปรแกรมที่กำหนดไว้ และตัดสินใจส่งคำสั่งไปยังแอคชูเอเตอร์</p>
+                    <p class="font-semibold text-green-200">ตัวอย่าง: บอร์ด Arduino, ESP32, Raspberry Pi, CPU  คอมพิวเตอร์</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl shadow-lg border border-transparent hover:border-green-400 transition-all duration-300 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons-outlined text-4xl text-green-300 mr-4">cloud_queue</span>
+                        <h3 class="text-2xl font-bold text-white">การเชื่อมต่อและคลาวด์</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">เป็นช่องทางสำหรับส่งข้อมูลระหว่างอุปกรณ์ IoT และระบบคลาวด์ ซึ่งทำหน้าที่จัดเก็บข้อมูลมหาศาล, ประมวลผลขั้นสูง, และแสดงผลข้อมูลให้ผู้ใช้เห็นผ่านแดชบอร์ด</p>
+                    <p class="font-semibold text-green-200">ตัวอย่าง: Wi-Fi, Bluetooth, 4G/5G, แดชบอร์ดแสดงผล</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-green-300">ตัวอย่างการใช้งาน IoT</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-black/20 p-6 rounded-xl">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="material-icons-outlined text-4xl text-green-300">smart_display</span>
+                        <h3 class="text-xl font-bold text-white">บ้านอัจฉริยะ (Smart Home)</h3>
+                    </div>
+                    <p class="text-gray-400">ควบคุมเครื่องใช้ไฟฟ้า, ระบบไฟส่องสว่าง, และระบบรักษาความปลอดภัยผ่านสมาร์ทโฟน</p>
+                </div>
+                <div class="bg-black/20 p-6 rounded-xl">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="material-icons-outlined text-4xl text-green-300">location_city</span>
+                        <h3 class="text-xl font-bold text-white">เมืองอัจฉริยะ (Smart City)</h3>
+                    </div>
+                    <p class="text-gray-400">บริหารจัดการจราจร, พลังงาน, และระบบขนส่งสาธารณะให้มีประสิทธิภาพ</p>
+                </div>
+                <div class="bg-black/20 p-6 rounded-xl">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="material-icons-outlined text-4xl text-green-300">factory</span>
+                        <h3 class="text-xl font-bold text-white">อุตสาหกรรมอัจฉริยะ (Smart Industry)</h3>
+                    </div>
+                    <p class="text-gray-400">ควบคุมเครื่องจักร, ตรวจสอบคุณภาพสินค้า, และติดตามสินค้าคงคลังแบบเรียลไทม์</p>
+                </div>
+                 <div class="bg-black/20 p-6 rounded-xl">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="material-icons-outlined text-4xl text-green-300">health_and_safety</span>
+                        <h3 class="text-xl font-bold text-white">สุขภาพอัจฉริยะ (Smart Health)</h3>
+                    </div>
+                    <p class="text-gray-400">อุปกรณ์สวมใส่ที่ติดตามการเต้นของหัวใจ, วัดระดับน้ำตาล, และแจ้งเตือนเหตุฉุกเฉิน</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-green-300">ประโยชน์ของ IoT</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 p-4 bg-green-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-green-300 mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-white">ความสะดวกสบาย</h4>
+                                <p class="text-gray-400">ควบคุมอุปกรณ์ต่างๆ ได้จากทุกที่ทุกเวลา</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 bg-green-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-green-300 mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-white">เพิ่มประสิทธิภาพ</h4>
+                                <p class="text-gray-400">เพิ่มประสิทธิภาพในการทำงานและการผลิต</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 bg-green-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-green-300 mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-white">ประหยัดพลังงาน</h4>
+                                <p class="text-gray-400">ช่วยควบคุมการใช้พลังงานให้เหมาะสม</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-red-400">ความเสี่ยงและความท้าทาย</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 p-4 bg-red-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-red-400 mt-1">warning</span>
+                            <div>
+                                <h4 class="font-bold text-white">ความปลอดภัยของข้อมูล</h4>
+                                <p class="text-gray-400">ข้อมูลอาจถูกขโมยหรือรั่วไหลระหว่างการส่งผ่านได้</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 bg-red-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-red-400 mt-1">warning</span>
+                            <div>
+                                <h4 class="font-bold text-white">ความปลอดภัยของอุปกรณ์</h4>
+                                <p class="text-gray-400">อุปกรณ์ IoT อาจถูกแฮกเกอร์โจมตีและเข้าควบคุมได้</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 bg-red-900/30 rounded-lg">
+                            <span class="material-icons-outlined text-red-400 mt-1">warning</span>
+                            <div>
+                                <h4 class="font-bold text-white">ปัญหาความเป็นส่วนตัว</h4>
+                                <p class="text-gray-400">ข้อมูลส่วนบุคคลของผู้ใช้งานอาจถูกนำไปใช้โดยไม่ได้รับอนุญาต</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+        </section>
+
+        <section id="learn" class="content-section hidden">
+             <div class="bg-slate-700/50 p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto">
+                <span class="material-icons-outlined text-6xl text-green-400">psychology</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-4">ภารกิจ: สร้างระบบรดน้ำต้นไม้อัจฉริยะ</h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8">
+                    สวนหย่อมในโรงเรียนของเราสวยงาม แต่ต้องการการดูแลเอาใจใส่เรื่องการรดน้ำอย่างสม่ำเสมอ
+                    ภารกิจของเราคือการใช้ความรู้เรื่อง Internet of Things (IoT) เพื่อออกแบบ "ระบบรดน้ำต้นไม้อัจฉริยะ" ที่สามารถทำงานได้เองอัตโนมัติ!
+                </p>
+            </div>
+            <br>
+            <p class="text-3xl font-bold mt-4 mb-2 text-white text-center"> ส่วนประกอบของระบบรดน้ำต้นไม้อัจฉริยะ</p>
+            <br>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-700/50 p-6 rounded-xl shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <span class="material-icons-outlined text-5xl text-green-400">sensors</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2 text-white">เซ็นเซอร์ (Sensor)</h3>
+                    <p class="text-gray-300">อุปกรณ์ที่ใช้วัดค่าต่างๆ จากสภาพแวดล้อม เช่น เซ็นเซอร์วัดความชื้นในดิน, เซ็นเซอร์วัดอุณหภูมิ, หรือเซ็นเซอร์วัดแสง</p>
+                </div>
+                <div class="bg-slate-700/50 p-6 rounded-xl shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <span class="material-icons-outlined text-5xl text-green-400">memory</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2 text-white">ไมโครคอนโทรลเลอร์</h3>
+                    <p class="text-gray-300">สมองกลของระบบ ทำหน้าที่รับข้อมูลจากเซ็นเซอร์มาประมวลผลและตัดสินใจสั่งการอุปกรณ์อื่นๆ เช่น บอร์ด ESP32, Arduino</p>
+                </div>
+                <div class="bg-slate-700/50 p-6 rounded-xl shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <span class="material-icons-outlined text-5xl text-green-400">precision_manufacturing</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2 text-white">แอคชูเอเตอร์ (Actuator)</h3>
+                    <p class="text-gray-300">อุปกรณ์ที่ทำงานตามคำสั่งที่ได้รับจากไมโครคอนโทรลเลอร์ เพื่อให้เกิดการกระทำบางอย่าง เช่น ปั๊มน้ำ, มอเตอร์, หลอดไฟ</p>
+                </div>
+                <div class="bg-slate-700/50 p-6 rounded-xl shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <span class="material-icons-outlined text-5xl text-green-400">cloud</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2 text-white">คลาวด์และแดชบอร์ด</h3>
+                    <p class="text-gray-300">ที่สำหรับเก็บข้อมูลที่วัดได้ และแสดงผลข้อมูลเหล่านั้นให้เราดูได้ผ่านอินเทอร์เน็ต ไม่ว่าจะอยู่ที่ไหนก็ตาม</p>
+                </div>
+             </div>
+        </section>
+
+        <section id="build" class="content-section hidden">
+            <h2 class="text-3xl font-bold text-center mb-2 text-white">มาสร้างแผนผังระบบของเรากัน!</h2>
+            <p class="text-center text-gray-400 mb-8">ลากการ์ดส่วนประกอบทางซ้าย ไปวางในช่องแผนผังทางขวาให้ถูกต้อง</p>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div id="draggable-container" class="lg:w-1/3 bg-slate-800/60 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center text-white">ส่วนประกอบของเรา</h3>
+                    <div class="space-y-4">
+                        <div id="item-sensor" draggable="true" class="draggable-item bg-sky-600 p-4 rounded-lg shadow-md cursor-grab active:cursor-grabbing flex items-center gap-3">
+                            <span class="material-icons-outlined">grass</span>
+                            <span class="font-semibold">เซ็นเซอร์วัดความชื้นดิน</span>
+                        </div>
+                        <div id="item-mcu" draggable="true" class="draggable-item bg-indigo-600 p-4 rounded-lg shadow-md cursor-grab active:cursor-grabbing flex items-center gap-3">
+                            <span class="material-icons-outlined">developer_board</span>
+                            <span class="font-semibold">บอร์ด ESP32</span>
+                        </div>
+                        <div id="item-actuator" draggable="true" class="draggable-item bg-rose-600 p-4 rounded-lg shadow-md cursor-grab active:cursor-grabbing flex items-center gap-3">
+                            <span class="material-icons-outlined">water_drop</span>
+                            <span class="font-semibold">ปั๊มน้ำขนาดเล็ก</span>
+                        </div>
+                        <div id="item-cloud" draggable="true" class="draggable-item bg-amber-600 p-4 rounded-lg shadow-md cursor-grab active:cursor-grabbing flex items-center gap-3">
+                            <span class="material-icons-outlined">cloud_upload</span>
+                            <span class="font-semibold">แพลตฟอร์มคลาวด์</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 bg-slate-800/60 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center text-white">แผนผังระบบรดน้ำอัจฉริยะ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div id="target-sensor" data-target-id="item-sensor" class="drop-zone h-24 p-4 rounded-lg flex flex-col justify-center items-center">
+                            <p class="font-semibold text-gray-300">ส่วนตรวจวัดค่าจากดิน</p>
+                        </div>
+                        <div id="target-mcu" data-target-id="item-mcu" class="drop-zone h-24 p-4 rounded-lg flex flex-col justify-center items-center">
+                            <p class="font-semibold text-gray-300">ส่วนประมวลผลและตัดสินใจ</p>
+                        </div>
+                        <div id="target-actuator" data-target-id="item-actuator" class="drop-zone h-24 p-4 rounded-lg flex flex-col justify-center items-center">
+                            <p class="font-semibold text-gray-300">ส่วนสั่งการรดน้ำ</p>
+                        </div>
+                        <div id="target-cloud" data-target-id="item-cloud" class="drop-zone h-24 p-4 rounded-lg flex flex-col justify-center items-center">
+                            <p class="font-semibold text-gray-300">ส่วนเก็บและแสดงผลข้อมูล</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<section id="quiz" class="content-section hidden">
+    <h2 class="text-3xl font-bold text-center mb-8 text-white">ทดสอบความเข้าใจ</h2>
+    <div class="max-w-2xl mx-auto space-y-8">
+        <div class="quiz-question bg-slate-700/50 p-6 rounded-xl shadow-lg">
+            <p class="text-xl font-semibold mb-4">1. อุปกรณ์ใดทำหน้าที่เหมือน 'สมอง' ของระบบ IoT ที่คอยรับข้อมูลมาคิดและสั่งการ?</p>
+            <ul class="space-y-3">
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">A) เซ็นเซอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition" data-correct="true">B) ไมโครคอนโทรลเลอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">C) แอคชูเอเตอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">D) คลาวด์</li>
+            </ul>
+        </div>
+        <div class="quiz-question bg-slate-700/50 p-6 rounded-xl shadow-lg">
+            <p class="text-xl font-semibold mb-4">2. หากเราต้องการสั่งให้ 'ปั๊มน้ำ' ทำงานเพื่อรดน้ำต้นไม้ อุปกรณ์นั้นจัดเป็นประเภทใด?</p>
+            <ul class="space-y-3">
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">A) เซ็นเซอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">B) ไมโครคอนโทรลเลอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition" data-correct="true">C) แอคชูเอเตอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">D) แดชบอร์ด</li>
+            </ul>
+        </div>
+        <div class="quiz-question bg-slate-700/50 p-6 rounded-xl shadow-lg">
+            <p class="text-xl font-semibold mb-4">3. อุปกรณ์ที่ทำหน้าที่ 'รับรู้' หรือ 'วัดค่า' จากสภาพแวดล้อม เช่น ความชื้นในดิน คืออะไร?</p>
+            <ul class="space-y-3">
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition" data-correct="true">A) เซ็นเซอร์</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">B) ESP32</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">C) ปั๊มน้ำ</li>
+                <li class="quiz-option bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-500 transition">D) คลาวด์</li>
+            </ul>
+        </div>
+        <div class="text-center mt-8">
+            <button id="show-score-btn" class="hidden bg-green-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-green-600 transition duration-300 shadow-lg mb-4">
+                ดูคะแนน
+            </button>
+            <button id="reset-all-btn" class="hidden bg-yellow-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-600 transition duration-300 shadow-lg">
+                คืนค่า
+            </button>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Navigation ---
+        const menuLinks = document.querySelectorAll('.menu-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        function showSection(targetId) {
+            contentSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(targetId).classList.remove('hidden');
+
+            menuLinks.forEach(link => {
+                link.classList.remove('menu-active');
+                if (link.dataset.target === targetId) {
+                    link.classList.add('menu-active');
+                }
+            });
+            // เมื่อย้ายไป Quiz Section ให้รีเซ็ตสถานะทั้งหมด
+            if (targetId === 'quiz') {
+                resetAllQuizAnswers(); // รีเซ็ตทุกอย่างเมื่อเข้าหน้า Quiz
+            }
+        }
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = e.currentTarget.dataset.target;
+                showSection(targetId);
+            });
+        });
+
+        // Initialize by showing the home section (or any default)
+        showSection('home');
+
+
+        // --- Drag and Drop (โค้ดส่วนนี้ยังคงเดิม) ---
+        const draggableItems = document.querySelectorAll('.draggable-item');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        let droppedCount = 0;
+
+        draggableItems.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.id);
+                setTimeout(() => {
+                    e.target.classList.add('opacity-50');
+                }, 0);
+            });
+
+            item.addEventListener('dragend', (e) => {
+                e.target.classList.remove('opacity-50');
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault(); // Necessary to allow dropping
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                const id = e.dataTransfer.getData('text');
+                const draggableElement = document.getElementById(id);
+                
+                if (zone.dataset.targetId === id) {
+                    // Correct drop
+                    zone.innerHTML = ''; // Clear the placeholder text
+                    zone.appendChild(draggableElement);
+                    draggableElement.setAttribute('draggable', 'false');
+                    draggableElement.classList.add('dropped-item');
+                    draggableElement.classList.remove('cursor-grab', 'active:cursor-grabbing');
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ถูกต้อง!',
+                        text: 'คุณวางส่วนประกอบได้ถูกตำแหน่งแล้ว',
+                        timer: 1500,
+                        showConfirmButton: false,
+                        background: '#1e293b', // slate-800
+                        color: '#e2e8f0' // slate-200
+                    });
+
+                    droppedCount++;
+                    if (droppedCount === 4) {
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'เยี่ยมมาก!',
+                                html: '<strong class="text-lg text-white">คุณได้สร้างแผนผังระบบ IoT สำเร็จแล้ว</strong>',
+                                confirmButtonText: 'เก่งมากเลยคับ!',
+                                background: '#1e293b',
+                                color: '#e2e8f0',
+                                confirmButtonColor: '#22c55e' // green-500
+                            });
+                        }, 500);
+                    }
+                } else {
+                    // Incorrect drop
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ลองอีกครั้งนะ',
+                        text: 'ตำแหน่งนี้ยังไม่ถูกต้อง ลองดูใหม่นะ',
+                        timer: 1500,
+                        showConfirmButton: false,
+                        background: '#1e293b',
+                        color: '#e2e8f0'
+                    });
+                }
+            });
+        });
+
+        // --- Quiz Logic (ปรับปรุงใหม่ทั้งหมด) ---
+        const quizQuestions = document.querySelectorAll('.quiz-question');
+        const showScoreBtn = document.getElementById('show-score-btn');
+        const resetAllBtn = document.getElementById('reset-all-btn');
+        let answeredQuestionsCount = 0; // นับจำนวนข้อที่ผู้ใช้ตอบไปแล้ว
+
+        // ฟังก์ชันสำหรับรีเซ็ตคำตอบทั้งหมด
+        function resetAllQuizAnswers() {
+            quizQuestions.forEach(questionDiv => {
+                const options = questionDiv.querySelectorAll('.quiz-option');
+                options.forEach(option => {
+                    // ลบคลาสที่เกี่ยวข้องกับสถานะการเลือก/ความถูกต้อง
+                    option.classList.remove('bg-green-500', 'bg-red-500', 'text-white', 'font-bold', 'selected-option');
+                    // เพิ่มคลาสสีเริ่มต้นกลับเข้าไป
+                    option.classList.add('bg-slate-600', 'hover:bg-slate-500');
+                    option.style.pointerEvents = 'auto'; // เปิดให้คลิกได้อีกครั้ง
+                });
+                // ลบสถานะว่าคำถามนี้เคยถูกตอบไปแล้ว
+                questionDiv.dataset.answered = 'false'; 
+            });
+            answeredQuestionsCount = 0; // รีเซ็ตจำนวนข้อที่ตอบแล้ว
+            showScoreBtn.classList.add('hidden'); // ซ่อนปุ่มดูคะแนน
+            resetAllBtn.classList.add('hidden'); // ซ่อนปุ่มคืนค่า
+        }
+
+        // เพิ่ม Event Listener ให้แต่ละตัวเลือกในแต่ละคำถาม
+        quizQuestions.forEach(questionDiv => {
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // ถ้าคำถามนี้ถูกตอบไปแล้ว ไม่ต้องทำอะไร
+                    if (questionDiv.dataset.answered === 'true') {
+                        return;
+                    }
+
+                    // ลบการเลือกเก่าในคำถามนี้ออก
+                    options.forEach(opt => {
+                        opt.classList.remove('bg-blue-700', 'border-blue-500', 'border-2'); // ลบสีที่แสดงว่าถูกเลือกชั่วคราว
+                    });
+
+                    // เพิ่มคลาส 'selected-option' และสีที่แสดงว่าถูกเลือก
+                    this.classList.add('selected-option', 'bg-blue-700', 'border-blue-500', 'border-2');
+                    
+                    // ทำเครื่องหมายว่าคำถามนี้ถูกตอบแล้ว
+                    questionDiv.dataset.answered = 'true';
+                    
+                    // นับจำนวนคำถามที่ตอบแล้ว
+                    let tempAnsweredCount = 0;
+                    quizQuestions.forEach(q => {
+                        if (q.dataset.answered === 'true') {
+                            tempAnsweredCount++;
+                        }
+                    });
+                    answeredQuestionsCount = tempAnsweredCount; // อัปเดตค่า global
+
+                    // ถ้าตอบครบทุกข้อแล้ว ให้แสดงปุ่มดูคะแนนและคืนค่า
+                    if (answeredQuestionsCount === quizQuestions.length) {
+                        showScoreBtn.classList.remove('hidden');
+                        resetAllBtn.classList.remove('hidden');
+                    }
+                });
+            });
+        });
+        
+        // Event Listener สำหรับปุ่ม "ดูคะแนน"
+        showScoreBtn.addEventListener('click', () => {
+            let currentScore = 0;
+
+            quizQuestions.forEach(questionDiv => {
+                const options = questionDiv.querySelectorAll('.quiz-option');
+                const correctOption = questionDiv.querySelector('[data-correct="true"]');
+                const selectedOption = questionDiv.querySelector('.quiz-option.selected-option'); // หาตัวเลือกที่ผู้ใช้เลือก
+
+                // หากมีตัวเลือกที่ถูกเลือก
+                if (selectedOption) {
+                    // ลบ hover effect เพื่อไม่ให้รบกวนการแสดงผล
+                    options.forEach(opt => opt.classList.remove('hover:bg-slate-500'));
+
+                    // ตรวจสอบความถูกต้องและให้คะแนน/แสดงผล
+                    if (selectedOption === correctOption) {
+                        currentScore++;
+                        selectedOption.classList.remove('bg-blue-700', 'border-blue-500', 'border-2', 'bg-slate-600');
+                        selectedOption.classList.add('bg-green-500', 'font-bold');
+                    } else {
+                        selectedOption.classList.remove('bg-blue-700', 'border-blue-500', 'border-2', 'bg-slate-600');
+                        selectedOption.classList.add('bg-red-500', 'font-bold');
+                        // แสดงคำตอบที่ถูกต้องด้วย (ถ้าไม่ได้เลือกถูก)
+                        if (correctOption) {
+                            correctOption.classList.remove('bg-slate-600');
+                            correctOption.classList.add('bg-green-500', 'text-white');
+                        }
+                    }
+                    // ปิดการคลิกหลังจากแสดงผลลัพธ์
+                    options.forEach(opt => opt.style.pointerEvents = 'none');
+                }
+            });
+
+            let title = '';
+            if (currentScore === quizQuestions.length) {
+                title = 'สุดยอดไปเลย!';
+            } else if (currentScore >= quizQuestions.length / 2) {
+                title = 'เยี่ยมมาก!';
+            } else {
+                title = 'พยายามอีกหน่อยนะ!';
+            }
+
+            Swal.fire({
+                title: title,
+                html: `<strong class="text-lg text-white">คุณทำได้ ${currentScore}/${quizQuestions.length} คะแนน</strong>`,
+                icon: 'info',
+                confirmButtonText: 'ตกลง',
+                background: '#1e293b',
+                color: '#e2e8f0',
+                confirmButtonColor: '#22c55e'
+            });
+        });
+
+        // Event Listener สำหรับปุ่ม "คืนค่า"
+        resetAllBtn.addEventListener('click', () => {
+            resetAllQuizAnswers();
+            Swal.fire({
+                icon: 'info',
+                title: 'รีเซ็ตคำตอบแล้ว!',
+                text: 'คุณสามารถทำแบบทดสอบใหม่ได้เลย',
+                timer: 1500,
+                showConfirmButton: false,
+                background: '#1e293b',
+                color: '#e2e8f0'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

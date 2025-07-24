@@ -1,0 +1,27 @@
+/* Custom Styles */
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+/* Custom class for active menu item */
+.menu-active {
+    background-color: #4ade80; /* green-400 */
+    color: #1f2937; /* gray-800 */
+}
+
+/* Style for drop zones */
+.drop-zone {
+    border: 2px dashed #9ca3af; /* gray-400 */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.drop-zone.drag-over {
+    background-color: rgba(74, 222, 128, 0.2); /* green-400 with opacity */
+    border-color: #4ade80; /* green-400 */
+}
+
+/* Style for draggable items after being dropped */
+.dropped-item {
+    cursor: default;
+    opacity: 1 !important;
+}
